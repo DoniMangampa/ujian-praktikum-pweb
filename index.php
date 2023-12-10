@@ -17,12 +17,15 @@ $fakultas   = "";
 $sukses     = "";
 $error      = "";
 
-
+// Ini akan menangikap isi dari opnya, lalu akan didapatkan dari get dimasukkan dari get jika tidak opnya = 0
+// Op --> menangkap variabel yang kita lewatkan di url kita
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
 } else {
     $op = "";
 }
+
+// Codingan menu delete
 if($op == 'delete'){
     $id         = $_GET['id'];
     $sql1       = "delete from mahasiswa where id = '$id'";
@@ -33,6 +36,8 @@ if($op == 'delete'){
         $error  = "Gagal melakukan delete data";
     }
 }
+
+// Codingan menu edit, dimana data yg ditampilkan yaitu, nim, nama, alamat dan fakultas,
 if ($op == 'edit') {
     $id         = $_GET['id'];
     $sql1       = "select * from mahasiswa where id = '$id'";
@@ -43,6 +48,7 @@ if ($op == 'edit') {
     $alamat     = $r1['alamat'];
     $fakultas   = $r1['fakultas'];
 
+    // ji
     if ($nim == '') {
         $error = "Data tidak ditemukan";
     }
@@ -223,10 +229,7 @@ if (isset($_POST['simpan'])) { //untuk create
                                 <td scope="row"><?php echo $alamat ?></td>
                                 <td scope="row"><?php echo $fakultas ?></td>
                                 <td scope="row">
-                                    <!-- Membuat tombol button Edit dan Delete dengan framework bootstrap -->
-                                    <button type="button" class="btn btn-success">Edit</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
-                                    
+                                    <!-- Membuat tombol button Edit dan Delete dengan framework bootstrap -->   `
                                     <a href="index.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-success">Edit</button></a>
                                     <a href="index.php?op=delete&id=<?php echo $id?>" onclick="return confirm('Yakin mau delete data?')"><button type="button" class="btn btn-danger">Delete</button></a>            
                                 </td>
